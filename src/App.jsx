@@ -1,66 +1,56 @@
-import React, { useState } from 'react';
-import { Routes, Route, useNavigate, useSearchParams } from 'react-router-dom';
-import { auth, db } from './firebase.js'; 
-
-const avatars = [
-  "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix",
-  "https://api.dicebear.com/7.x/avataaars/svg?seed=Aneka",
-  "https://api.dicebear.com/7.x/avataaars/svg?seed=Dusty",
-  "https://api.dicebear.com/7.x/avataaars/svg?seed=Nala"
-];
+import React from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const navigate = useNavigate();
   return (
-    <div style={{minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#0f172a', color: 'white', padding: '20px'}}>
-      <div style={{width: '100%', maxWidth: '400px', background: '#1e293b', padding: '40px', borderRadius: '30px', textAlign: 'center', border: '1px solid #334155'}}>
-        <h2 style={{fontSize: '32px', fontWeight: '900', color: '#3b82f6', marginBottom: '30px'}}>EARNING X</h2>
-        <input style={{width: '100%', padding: '15px', marginBottom: '15px', borderRadius: '15px', background: '#0f172a', border: '1px solid #334155', color: 'white'}} placeholder="Email" />
-        <input style={{width: '100%', padding: '15px', marginBottom: '25px', borderRadius: '15px', background: '#0f172a', border: '1px solid #334155', color: 'white'}} type="password" placeholder="Password" />
-        <button onClick={() => navigate('/main')} style={{width: '100%', padding: '15px', background: '#2563eb', border: 'none', borderRadius: '15px', color: 'white', fontWeight: 'bold', cursor: 'pointer'}}>LOGIN</button>
-        <p style={{marginTop: '20px', color: '#94a3b8', cursor: 'pointer'}} onClick={() => navigate('/register')}>New account? <span style={{color: '#60a5fa'}}>Register</span></p>
-      </div>
-    </div>
-  );
-};
-
-const Register = () => {
-  const [searchParams] = useSearchParams();
-  const inviteCode = searchParams.get('invitationCode') || '';
-  const navigate = useNavigate();
-  return (
-    <div style={{minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#0f172a', color: 'white', padding: '20px'}}>
-      <div style={{width: '100%', maxWidth: '400px', background: '#1e293b', padding: '40px', borderRadius: '30px', border: '1px solid #334155'}}>
-        <h2 style={{textAlign: 'center', color: '#3b82f6', marginBottom: '20px'}}>Register</h2>
-        <input style={{width: '100%', padding: '15px', marginBottom: '15px', borderRadius: '12px', background: '#0f172a', border: '1px solid #334155', color: 'white'}} placeholder="Full Name" />
-        <input style={{width: '100%', padding: '15px', marginBottom: '15px', borderRadius: '12px', background: '#0f172a', border: '1px solid #334155', color: 'white'}} placeholder="Email" />
-        <input style={{width: '100%', padding: '15px', marginBottom: '15px', borderRadius: '12px', background: '#0f172a', border: '1px solid #334155', color: 'white'}} defaultValue={inviteCode} placeholder="Invite Code" />
-        <button onClick={() => navigate('/main')} style={{width: '100%', padding: '15px', background: '#059669', border: 'none', borderRadius: '12px', color: 'white', fontWeight: 'bold'}}>CREATE ACCOUNT</button>
-        <p style={{marginTop: '15px', textAlign: 'center', color: '#94a3b8', cursor: 'pointer'}} onClick={() => navigate('/login')}>Back to Login</p>
+    <div className="min-h-screen flex items-center justify-center bg-[#0f172a] text-white">
+      <div className="w-full max-w-sm bg-[#1e293b] p-10 rounded-[30px] shadow-2xl border border-gray-700 text-center">
+        <h1 className="text-4xl font-black text-blue-500 mb-8 italic">EARNING X</h1>
+        <input className="w-full p-4 bg-gray-900 border border-gray-700 rounded-2xl mb-4 text-white outline-none" placeholder="Email" />
+        <input className="w-full p-4 bg-gray-900 border border-gray-700 rounded-2xl mb-6 text-white outline-none" type="password" placeholder="Password" />
+        <button onClick={() => navigate('/main')} className="w-full bg-blue-600 py-4 rounded-2xl font-bold">SIGN IN</button>
+        <p className="mt-5 text-gray-400 cursor-pointer" onClick={() => navigate('/register')}>New account? <span className="text-blue-400">Register</span></p>
       </div>
     </div>
   );
 };
 
 const Main = () => {
-  const [user] = useState({ name: 'User', avatar: avatars[0] });
   return (
-    <div style={{minHeight: '100vh', background: '#0f172a', color: 'white'}}>
-      <nav style={{display: 'flex', justifyContent: 'space-between', padding: '15px', background: '#1e293b', alignItems: 'center'}}>
-        <div style={{fontSize: '20px'}}>☰</div>
-        <div style={{fontWeight: 'bold', color: '#3b82f6'}}>EARNING X</div>
-        <img src={user.avatar} style={{width: '35px', borderRadius: '50%', border: '2px solid #3b82f6'}} alt="profile" />
+    <div className="min-h-screen bg-[#0f172a] text-white">
+      <nav className="p-5 bg-[#1e293b] flex justify-between items-center border-b border-gray-800">
+        <div className="text-xl font-bold text-blue-500 italic">EARNING X</div>
+        <div className="w-10 h-10 bg-gray-700 rounded-full border-2 border-blue-500 flex items-center justify-center">👤</div>
       </nav>
-      <div style={{padding: '20px', maxWidth: '500px', margin: '0 auto'}}>
-        <div style={{background: 'linear-gradient(to right, #2563eb, #4f46e5)', padding: '30px', borderRadius: '25px', marginBottom: '20px'}}>
-          <p style={{margin: 0, opacity: 0.8}}>Total Balance</p>
-          <h1 style={{fontSize: '40px', margin: '10px 0'}}>$0.00</h1>
+      <div className="p-6">
+        <div className="bg-gradient-to-r from-blue-600 to-indigo-700 p-8 rounded-[30px] shadow-lg mb-8">
+          <p className="opacity-80">Total Balance</p>
+          <h2 className="text-4xl font-black mt-2">$0.00</h2>
         </div>
-        <h3>Daily Tasks</h3>
-        <div style={{background: '#1e293b', padding: '20px', borderRadius: '20px', border: '1px solid #334155'}}>
-          <p>🐦 Twitter Tasks</p>
-          <button style={{width: '100%', padding: '12px', background: '#3b82f6', border: 'none', borderRadius: '10px', color: 'white', fontWeight: 'bold'}}>Bind Twitter Account</button>
+        <div className="bg-[#1e293b] p-6 rounded-3xl border border-gray-700">
+          <h3 className="font-bold mb-4">Twitter Tasks</h3>
+          <button className="w-full bg-blue-500 py-3 rounded-xl font-bold mb-3">Bind Account</button>
+          <div className="p-4 bg-gray-900 rounded-xl flex justify-between items-center border border-gray-800">
+            <span>Follow Earning X</span>
+            <button className="bg-white text-black px-4 py-1 rounded-full text-xs font-bold">START</button>
+          </div>
         </div>
+      </div>
+    </div>
+  );
+};
+
+const Register = () => {
+  const navigate = useNavigate();
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-[#0f172a] text-white">
+      <div className="w-full max-w-sm bg-[#1e293b] p-10 rounded-[30px] border border-gray-700">
+        <h2 className="text-3xl font-bold text-center mb-6">Register</h2>
+        <input className="w-full p-4 bg-gray-900 border border-gray-700 rounded-2xl mb-4" placeholder="Name" />
+        <input className="w-full p-4 bg-gray-900 border border-gray-700 rounded-2xl mb-4" placeholder="Email" />
+        <button onClick={() => navigate('/main')} className="w-full bg-blue-600 py-4 rounded-2xl font-bold">CREATE</button>
+        <p className="mt-4 text-center text-gray-400 cursor-pointer" onClick={() => navigate('/login')}>Login instead</p>
       </div>
     </div>
   );
@@ -69,10 +59,10 @@ const Main = () => {
 export default function App() {
   return (
     <Routes>
+      <Route path="/" element={<Login />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/main" element={<Main />} />
-      <Route path="/" element={<Login />} />
     </Routes>
   );
 }
